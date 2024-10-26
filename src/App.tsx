@@ -40,7 +40,7 @@ function App() {
         <div className="text-center mb-8 animate-fade-in">
           <h1 className="text-4xl font-bold mb-2 flex items-center justify-center gap-2">
             <Sparkles className="h-8 w-8 animate-pulse" />
-            Roulette à Boissons
+            Joyeux Anniversaire Tiphaine
             <Sparkles className="h-8 w-8 animate-pulse" />
           </h1>
           <p className="text-xl text-purple-200 animate-bounce-slow">

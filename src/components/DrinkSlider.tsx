@@ -12,7 +12,7 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
   const [boissonSelectionnee, setBoissonSelectionnee] = useState<string>('');
   const [position, setPosition] = useState(0);
   const [resetKey, setResetKey] = useState(0);
-  const [showPopup, setShowPopup] = useState(false); // État pour gérer l'affichage du popup
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     setPosition(0);
@@ -22,11 +22,10 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
   const lancerAnimation = () => {
     if (!active || enAnimation) return;
 
-    // Réinitialiser la position et les autres états pour une nouvelle animation
     setPosition(0);
     setResetKey(prev => prev + 1);
     setEnAnimation(true);
-    setShowPopup(false); // Cacher le popup au début de l'animation
+    setShowPopup(false);
 
     const indexAleatoire = Math.floor(Math.random() * boissons.length);
     setBoissonSelectionnee(boissons[indexAleatoire]);
@@ -38,7 +37,7 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
     const duration = 5000;
     const startTime = Date.now();
 
-    const totalDistance = (boissons.length * itemWidth * 4) + (indexAleatoire * itemWidth);
+    const totalDistance = (boissons.length * itemWidth * 5) + (indexAleatoire * itemWidth);
 
     const animate = () => {
       const currentTime = Date.now();
@@ -52,8 +51,6 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
         const finalPosition = startOffset - (indexAleatoire * itemWidth);
         setPosition(finalPosition);
         setEnAnimation(false);
-
-        // Afficher le popup à la fin de l'animation
         setShowPopup(true);
       }
     };
@@ -63,7 +60,6 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
 
   return (
     <div className="relative w-full max-w-2xl bg-purple-900/30 rounded-lg shadow-2xl backdrop-blur-sm">
-      {/* Popup affichant la boisson finale */}
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
           <div className="bg-white text-purple-800 p-6 rounded-lg shadow-lg text-center">
@@ -79,9 +75,8 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
         </div>
       )}
 
-      {/* Conteneur principal du slider, masqué si le popup est affiché */}
       {!showPopup && (
-        <div className="h-48 overflow-hidden relative">
+        <div className="h-48 flex items-center justify-center overflow-hidden relative">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shine"></div>
           <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-yellow-400 z-20">
             <div className="absolute inset-0 animate-pulse-fast bg-yellow-300/50 blur-sm"></div>
@@ -89,7 +84,7 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
 
           <div 
             key={resetKey}
-            className="absolute top-1/2 -translate-y-1/2 flex items-center gap-8 transition-transform duration-300"
+            className="flex items-center gap-8 transition-transform duration-300"
             style={{ 
               transform: `translateX(${position}px)`,
               transition: enAnimation ? 'none' : 'transform 0.3s ease'

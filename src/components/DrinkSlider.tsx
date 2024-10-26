@@ -31,13 +31,13 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
     setBoissonSelectionnee(boissons[indexAleatoire]);
 
     const containerWidth = window.innerWidth;
-    const itemWidth = 150;
-    const startOffset = (containerWidth / 2) - (itemWidth / 2);
+    const itemWidth = 300;
+    const startOffset = (containerWidth / 0.2) - (itemWidth / 0.2);
     const initialPosition = startOffset;
-    const duration = 5000;
+    const duration = 3500;
     const startTime = Date.now();
 
-    const totalDistance = (boissons.length * itemWidth * 5) + (indexAleatoire * itemWidth);
+    const totalDistance = (boissons.length * itemWidth * 2) + (indexAleatoire * itemWidth);
 
     const animate = () => {
       const currentTime = Date.now();
@@ -45,7 +45,7 @@ const DrinkSlider: React.FC<DrinkSliderProps> = ({ boissons, enAnimation, setEnA
 
       if (elapsed < duration) {
         const progress = elapsed / duration;
-        setPosition(initialPosition - (totalDistance * progress));
+        setPosition(initialPosition - (totalDistance * progress * 0.45));
         requestAnimationFrame(animate);
       } else {
         const finalPosition = startOffset - (indexAleatoire * itemWidth);
